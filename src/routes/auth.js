@@ -2,7 +2,7 @@ import express from 'express';
 import jwt from 'jsonwebtoken';
 
 import User from '../models/user.js';
-import {redisClient} from '../utils/redis-client.js';
+import redisClient from '../utils/redis-client.js';
 import {getAccessTokenByUserId} from "../utils/index.js";
 
 const router = express.Router();
@@ -39,9 +39,9 @@ router.post('/register', async (req, res) => {
 
         const token = getAccessTokenByUserId(user._id);
         // Store token in Redis Set for this user
-        /*const tokenKey = `active_${user._id}`;
+        const tokenKey = `active_${user._id}`;
         await redisClient.sAdd(tokenKey, token);
-        await redisClient.expire(tokenKey, 7 * 24 * 60 * 60); // 7 days TTL*/
+        await redisClient.expire(tokenKey, 7 * 24 * 60 * 60); // 7 days TTL
 
         res.status(201).json({
             token,
@@ -75,9 +75,9 @@ router.post('/login', async (req, res) => {
 
         const token = getAccessTokenByUserId(user._id);
         // Store token in Redis Set for this user
-        /*const tokenKey = `active_${user._id}`;
+        const tokenKey = `active_${user._id}`;
         await redisClient.sAdd(tokenKey, token);
-        await redisClient.expire(tokenKey, 7 * 24 * 60 * 60); // 7 days TTL*/
+        await redisClient.expire(tokenKey, 7 * 24 * 60 * 60); // 7 days TTL
 
         res.json({
             token,
@@ -97,8 +97,8 @@ router.post('/logout', async (req, res) => {
             return res.status(400).json({message: 'No token provided'});
         }
 
-        /*const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        await redisClient.sRem(`active_${decoded.id}`, token);*/
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        await redisClient.sRem(`active_${decoded.id}`, token);
 
         res.json({message: 'Logged out successfully'});
     } catch (err) {
