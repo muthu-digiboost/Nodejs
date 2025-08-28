@@ -1,0 +1,1 @@
+Simple Express.js REST API with JWT authentication and Product CRUD (MongoDB).
