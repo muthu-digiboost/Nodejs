@@ -97,9 +97,8 @@ router.post('/logout', async (req, res) => {
             return res.status(400).json({message: 'No token provided'});
         }
 
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
-        await redisClient.sRem(`active_${decoded.id}`, token);
+        /*const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        await redisClient.sRem(`active_${decoded.id}`, token);*/
 
         res.json({message: 'Logged out successfully'});
     } catch (err) {

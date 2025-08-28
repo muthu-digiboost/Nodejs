@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import User from '../models/User.js';
-import {redisClient} from "../utils/redisClient.js";
+import {redisClient} from "../utils/redis-client.js";
 
 export const authMiddleware = async (req, res, next) => {
     const authHeader = req.headers.authorization || '';

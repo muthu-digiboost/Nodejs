@@ -11,7 +11,11 @@ import userRoutes from './src/routes/user.js';
 import productRoutes from './src/routes/product.js';
 import errorHandler from './src/middleware/error-handler.js';
 
-dotenv.config();
+if (process.env.NODE_ENV !== "prod") {
+    dotenv.config({path: path.resolve(process.cwd(), `.env.${process.env.NODE_ENV}`)});
+} else {
+    dotenv.config();
+}
 
 const app = express();
 
