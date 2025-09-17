@@ -1,3 +1,9 @@
-node_modules/
 .idea
-.env.dev
+
+customer/node_modules/
+customer/.env.dev
+
+shopping/node_modules/
+shopping/.env.dev
+
+gateway/node_modules/
