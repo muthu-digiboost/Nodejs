@@ -7,7 +7,7 @@ const router = express.Router();
 // public
 router.get('/', async (req, res) => {
     try {
-        const products = await Product.find(undefined, undefined, undefined).populate('owner', 'name email').lean();
+        const products = await Product.find().populate('owner', 'name email').lean();
         res.json(products);
     } catch (err) {
         console.error(err);
