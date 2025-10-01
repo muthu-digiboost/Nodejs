@@ -57,3 +57,5 @@ mongoose.connect(MONGODB_URI)
         console.error('MongoDB connection error:', err);
         process.exit(1);
     });
+
+console.log("testing")
